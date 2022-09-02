@@ -1,5 +1,5 @@
 <x-layout>
-    <nav class="p-6 flex items-end flex-column">
+    <nav class="p-6 flex justify-end">
         <a href="/" class="px-4">Back</a>
     </nav>
     <main class="flex flex-col items-center justify-center mt-[79px]">

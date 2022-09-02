@@ -1,28 +1,5 @@
 <x-layout>
 
-    <nav class="p-6 border-b">
-
-        @auth
-
-            <div class="flex items-center">
-
-                <span class="pr-14">Wellcome, {{ auth()->user()->name }}</span>
-                <form action="/logout" method="post"class="px-8 mx-4">
-                @csrf
-                    <button type="submit">Log Out</button>
-                </form>
-                <a href="movies/create" class="px-8 mx-4">Add Movie</a>
-                <a href="quotes/create" class="px-8 mx-4">Add Quote</a>
-
-            </div>
-
-        @else
-            <a href="/login" class="px-4">Log In</a>
-            <a href="/register" class="px-4">Register</a>
-        @endauth
-
-    </nav>
-
     <main class="flex flex-col items-center justify-center mt-[156px]">
         
         @if ($movies->count() && $quotes->count())
@@ -40,7 +17,7 @@
 
         @else
 
-        <h2>There are no posts yet.</h2>
+        <h2 class="mt-60">There are no posts yet.</h2>
 
         @endif
         

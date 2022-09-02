@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>Document</title>
 </head>
 
@@ -33,8 +34,41 @@
         text-decoration: underline
     }
 </style>
+<body>
 
-<body>  
+    <nav class="p-6">
+
+        <div class="flex items-center justify-end">
+        @auth
+        <x-dropdown>
+
+            <x-slot name="trigger">
+                <button>Wellcome, {{ auth()->user()->name }}!</button>
+            </x-slot>
+
+            <x-dropdown-item href="/movies/create">
+                Add Movie
+            </x-dropdown-item>
+
+            <x-dropdown-item href="/quotes/create">
+                Add Quote
+            </x-dropdown-item>
+
+        </x-dropdown>
+            
+
+            <form action="/logout" method="post"class="px-8 mx-4">
+                @csrf
+                <button type="submit">Log Out</button>
+            </form>
+
+        @else
+            <a href="/login" class="px-4">Log In</a>
+            <a href="/register" class="px-4">Register</a>
+        @endauth
+    </div>
+
+    </nav>
 
     {{ $slot }}
 

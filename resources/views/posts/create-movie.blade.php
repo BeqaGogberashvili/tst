@@ -1,8 +1,5 @@
 <x-layout>
     <section>
-        <nav class="p-6">
-            <a href="/" class="px-4">Back</a>
-        </nav>
 
         <main class="flex flex-col items-center justify-center mt-[156px]" >
 
