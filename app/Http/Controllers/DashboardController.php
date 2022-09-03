@@ -9,20 +9,32 @@ use Illuminate\Validation\Rule;
 
 class DashboardController extends Controller
 {
-	public function index()
+	public function moviesIndex()
 	{
-		return view('components.dashboard', [
+		return view('components.movie-list', [
+			'movies' => Movies::paginate(15),
+		]);
+	}
+
+	public function quotesIndex()
+	{
+		return view('components.quote-list', [
 			'movies' => Movies::paginate(5),
 			'quotes' => Quotes::latest()->paginate(5),
 		]);
 	}
 
-	public function edit(Quotes $quote)
+	public function editQuote(Quotes $quote)
 	{
 		return view('posts.edit-quotes', ['quote' => $quote]);
 	}
 
-	public function update(Quotes $quote)
+	public function editMovie(Movies $movie)
+	{
+		return view('posts.edit-movies', ['movie' => $movie]);
+	}
+
+	public function updateQuote(Quotes $quote)
 	{
 		$attributes = request()->validate([
 			'quote'       => 'required',
@@ -37,13 +49,31 @@ class DashboardController extends Controller
 
 		$quote->update($attributes);
 
-		return redirect('/dashboard');
+		return redirect('/quote/list');
 	}
 
-	public function destroy(Quotes $quote)
+	public function updateMovie(Movies $movie)
+	{
+		$attributes = request()->validate([
+			'name'       => 'required|unique:movies',
+			'slug'       => 'required',
+		]);
+
+		$movie->update($attributes);
+
+		return redirect('/movie/list');
+	}
+
+	public function destroyQuote(Quotes $quote)
 	{
 		File::delete('storage/' . $quote->thumbnail);
 		$quote->delete();
-		return redirect('/dashboard');
+		return redirect('/quote/list');
+	}
+
+	public function destroyMovie(Movies $movie)
+	{
+		$movie->delete();
+		return redirect('/movie/list');
 	}
 }

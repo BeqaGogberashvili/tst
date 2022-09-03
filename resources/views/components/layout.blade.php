@@ -53,8 +53,12 @@
                 <button>Wellcome, {{ auth()->user()->name }}!</button>
             </x-slot>
 
-            <x-dropdown-item href="/dashboard">
-                Dashboard
+            <x-dropdown-item href="/movie/list">
+                Movie List
+            </x-dropdown-item>
+
+            <x-dropdown-item href="/quote/list">
+                Quote List
             </x-dropdown-item>
 
             <x-dropdown-item href="/movies/create">

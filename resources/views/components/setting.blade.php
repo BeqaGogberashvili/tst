@@ -4,13 +4,16 @@
         <aside class="w-48">
             <ul>
                 <li>
-                    <a href="/dashboard" class="{{ request()->is('dashboard') ? 'text-blue-500' : '' }}">Dashboard</a>
+                    <a href="/movie/list" class="{{ request()->is('movie/list') ? 'text-blue-500' : '' }}">Movie List</a>
                 </li>
                 <li>
-                    <a href="/movies/create" class="{{ request()->is('movies/create') ? 'text-blue-500' : '' }}">New Movie</a>
+                    <a href="/quote/list" class="{{ request()->is('quote/list') ? 'text-blue-500' : '' }}">Quote List</a>
                 </li>
                 <li>
-                    <a href="/quotes/create" class="{{ request()->is('quotes/create') ? 'text-blue-500' : '' }}">New Quote</a>
+                    <a href="/movies/create" class="{{ request()->is('movies/create') ? 'text-blue-500' : '' }}">Add Movie</a>
+                </li>
+                <li>
+                    <a href="/quotes/create" class="{{ request()->is('quotes/create') ? 'text-blue-500' : '' }}">Add Quote</a>
                 </li>
             </ul>
         </aside>

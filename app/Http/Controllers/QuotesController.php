@@ -35,7 +35,7 @@ class QuotesController extends Controller
 
 		Quotes::create($attributes);
 
-		return redirect('/dashboard');
+		return redirect('/quote/list');
 	}
 
 	public function show(Movies $movie)

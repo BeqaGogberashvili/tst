@@ -17,15 +17,20 @@ Route::post('login', [SessionsController::class, 'store'])->middleware('guest')-
 
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth')->name('destroy');
 
-Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
-
 Route::get('movies/create', [MoviesController::class, 'create'])->middleware('auth')->name('movies.create');
 Route::post('movies', [MoviesController::class, 'store'])->name('movies');
 Route::get('movies/{movie:slug}', [QuotesController::class, 'show'])->name('movies.show');
 
+Route::get('movie/list', [DashboardController::class, 'moviesIndex'])->middleware('auth')->name('movie.list');
+Route::get('quote/list', [DashboardController::class, 'quotesIndex'])->middleware('auth')->name('quote.list');
+
 Route::get('quotes/create', [QuotesController::class, 'create'])->middleware('auth')->name('quotes.create');
 Route::post('quotes', [QuotesController::class, 'store'])->name('quotes');
 
-Route::get('quotes/{quote}/edit', [DashboardController::class, 'edit'])->middleware('auth')->name('quote.edit');
-Route::patch('quotes/{quote}', [DashboardController::class, 'update'])->middleware('auth')->name('quote.update');
-Route::delete('quotes/{quote}', [DashboardController::class, 'destroy'])->middleware('auth')->name('quote.delete');
+Route::get('quotes/{quote}/edit', [DashboardController::class, 'editQuote'])->middleware('auth')->name('quote.edit');
+Route::patch('quotes/{quote}', [DashboardController::class, 'updateQuote'])->middleware('auth')->name('quote.update');
+Route::delete('quotes/{quote}', [DashboardController::class, 'destroyQuote'])->middleware('auth')->name('quote.delete');
+
+Route::get('movies/{movie}/edit', [DashboardController::class, 'editMovie'])->middleware('auth')->name('movie.edit');
+Route::patch('movies/{movie}', [DashboardController::class, 'updateMovie'])->middleware('auth')->name('movie.update');
+Route::delete('movies/{movie}', [DashboardController::class, 'destroyMovie'])->middleware('auth')->name('movie.delete');

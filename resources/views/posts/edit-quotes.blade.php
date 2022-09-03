@@ -1,6 +1,6 @@
 <x-layout>
     
-        <x-setting heading="Add Quote:">
+        <x-setting>
             <form action="/quotes/{{ $quote->id }}" method="POST" enctype="multipart/form-data" class="m-10">
                 @csrf
                 @method('PATCH')
