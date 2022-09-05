@@ -6,6 +6,7 @@ use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LanguageController;
 
 Route::get('/', [QuotesController::class, 'index'])->name('index');
 
@@ -34,3 +35,5 @@ Route::delete('quotes/{quote}', [DashboardController::class, 'destroyQuote'])->m
 Route::get('movies/{movie}/edit', [DashboardController::class, 'editMovie'])->middleware('auth')->name('movie.edit');
 Route::patch('movies/{movie}', [DashboardController::class, 'updateMovie'])->middleware('auth')->name('movie.update');
 Route::delete('movies/{movie}', [DashboardController::class, 'destroyMovie'])->middleware('auth')->name('movie.delete');
+
+Route::get('/change-locale/{locale}', [LanguageController::class, 'change'])->name('locale.change');

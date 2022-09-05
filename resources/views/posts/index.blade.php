@@ -1,4 +1,5 @@
 <x-layout>
+    <h1>{{__('text.hello_world')}}</h1>
 
     <main class="flex flex-col items-center justify-center mt-[156px]">
         
