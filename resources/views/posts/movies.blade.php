@@ -1,4 +1,5 @@
 <x-layout>
+
     <main class="flex flex-col items-center justify-center mt-[79px]">
     
         <div class="mb-[67px] ">

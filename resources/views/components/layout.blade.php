@@ -40,8 +40,22 @@
         text-decoration: underline
     }
     
+    button:hover{
+    text-decoration:underline;
+    }
+    
 </style>
 <body>
+
+    <div class="absolute top-[473px] left-[54px] flex flex-col items-center">
+        <div class="w-10 h-10 border-2 rounded-full flex items-center justify-center">
+            <a href="/change-locale/en">en</a>
+        </div>
+        <div class="w-10 h-10 border-2 rounded-full flex items-center justify-center mt-2">
+            <a href="/change-locale/ka">ka</a>
+        </div>
+        
+    </div>
 
     <nav class="p-6">
 
@@ -50,27 +64,32 @@
         <x-dropdown>
 
             <x-slot name="trigger">
-                <button>Wellcome, {{ auth()->user()->name }}!</button>
+                <button>
+                    {{__('text.wellcome')}}, {{ auth()->user()->name }}!</button>
             </x-slot>
 
+            <x-dropdown-item href="/">
+                {{__('text.home')}}
+            </x-dropdown-item>
+
             <x-dropdown-item href="/movie/list">
-                Movie List
+                {{__('text.movie_list')}}
             </x-dropdown-item>
 
             <x-dropdown-item href="/quote/list">
-                Quote List
+                {{__('text.quote_list')}}
             </x-dropdown-item>
 
             <x-dropdown-item href="/movies/create">
-                Add Movie
+                {{__('text.add_movie')}}
             </x-dropdown-item>
 
             <x-dropdown-item href="/quotes/create">
-                Add Quote
+                {{__('text.add_quote')}}
             </x-dropdown-item>
 
             <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">
-                Log Out
+                {{__('text.logout')}}
             </x-dropdown-item>
 
         </x-dropdown>
@@ -81,8 +100,7 @@
             </form>
 
         @else
-            <a href="/login" class="px-4">Log In</a>
-            <a href="/register" class="px-4">Register</a>
+            <a href="/login" class="px-4">{{__('text.login')}}</a>
         @endauth
     </div>
 

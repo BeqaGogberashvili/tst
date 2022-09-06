@@ -5,9 +5,9 @@
                 @csrf
                 @method('PATCH')
 
-                <x-form.input name="name" value="{{ $movie->name }}" />
-                <x-form.input name="slug" value="{{ $movie->slug }}" />
-                <x-form.button>Submit</x-form.button>
+                <x-form.input name="title_en" value="{{ $en }}" />
+                <x-form.input name="title_ka" value="{{ $ka }}" />
+                <x-form.button>{{__('text.edit')}}</x-form.button>
                 
             </form>
         </x-setting>
