@@ -3,24 +3,15 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 
 class SetLocalLanguage
 {
-	public function handle(Request $request, Closure $next): Response
+	public function handle(Request $request, Closure $next): Response|RedirectResponse|JsonResponse
 	{
-		if (session()->has('lang'))
-		{
-			dd(1);
-			app()->setLocale(session('lang'));
-		}
-		else
-		{
-			dd(2);
-			app()->setLocale(config('app.locale'));
-		}
-		return $next($request);
 		$lang = session('lang', 'en');
 		app()->setLocale($lang);
 		return $next($request);
