@@ -5,8 +5,8 @@
                 @csrf
                 @method('PATCH')
 
-                <x-form.input name="title_en" value="{{ $en }}" />
-                <x-form.input name="title_ka" value="{{ $ka }}" />
+                <x-form.input name="title_en" value="{{ $movie->getTranslation('title', 'en') }}" />
+                <x-form.input name="title_ka" value="{{ $movie->getTranslation('title', 'ka') }}" />
                 <x-form.button>{{__('text.edit')}}</x-form.button>
                 
             </form>

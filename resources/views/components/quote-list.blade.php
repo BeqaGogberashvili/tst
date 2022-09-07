@@ -1,10 +1,6 @@
 <x-layout>
     <x-setting>
 
-        {{-- @foreach ($movies as $movie)
-            <h1>{{ $movie->name }}</h1>
-        @endforeach --}}
-
     <div>
         <div class="min-h-[360px]">
         @if ($quotes->count())

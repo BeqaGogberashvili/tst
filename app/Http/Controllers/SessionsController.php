@@ -2,33 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
+
 class SessionsController extends Controller
 {
-	public function create()
-	{
-		return view('sessions.create');
-	}
+    public function store(): RedirectResponse
+    {
+        $attributes = request()->validate([
+            'email'    => 'required|email',
+            'password' => 'required',
+        ]);
 
-	public function store()
-	{
-		$attributes = request()->validate([
-			'email'    => 'required|email',
-			'password' => 'required',
-		]);
+        if (auth()->attempt($attributes)) {
+            session()->regenerate();
+            return redirect()->route('index');
+        }
 
-		if (auth()->attempt($attributes))
-		{
-			session()->regenerate();
-			return redirect('/');
-		}
+        return back()->withErrors(['email' => 'Incorrect Email or Passowrd']);
+    }
 
-		return back()->withErrors(['email' => 'Incorrect Email or Passowrd']);
-	}
+    public function destroy(): RedirectResponse
+    {
+        auth()->logout();
 
-	public function destroy()
-	{
-		auth()->logout();
-
-		return redirect('/');
-	}
+        return redirect()->route('index');
+    }
 }

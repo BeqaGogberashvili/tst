@@ -11,7 +11,7 @@
                 <select name="movie_id" id="movie_id" class="mb-14 border border-[#292828] w-full rounded-sm outline-0 px-4 py-2" style="background: #474646">
     
                     @php
-                        $movies = \App\Models\Movies::all();
+                        $movies = \App\Models\Movie::all();
                     @endphp
                 
                     @foreach ($movies as $movie)

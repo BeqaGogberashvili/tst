@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class Movies extends Model
+class Movie extends Model
 {
-	use HasFactory, HasTranslations;
+    use HasFactory;
+    use HasTranslations;
 
-	public $translatable = ['title'];
+    public $translatable = ['title'];
 
-	protected $guarded = ['id'];
+    protected $guarded = ['id'];
 }
