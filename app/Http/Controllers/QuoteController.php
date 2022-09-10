@@ -8,49 +8,64 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreQuoteRequest;
+use App\Models\Movie;
 
 class QuoteController extends Controller
 {
-	public function store(StoreQuoteRequest $request)
-	{
-		request()->file('thumbnail')->store('images');
-		$quote = new Quote();
-		$translations = ['en' => $request->title_en, 'ka' => $request->title_ka];
-		$quote->setTranslations('quote', $translations);
-		$quote->thumbnail = request()->file('thumbnail')->store('images');
-		$quote->movie_id = $request['movie_id'];
-		$quote->save();
-		return redirect()->route('quote.list');
-	}
+    public function index(): View
+    {
+        return view('posts.index', [
+            'quote' => Quote::inRandomOrder()->first()
+        ]);
+    }
 
-	public function edit(Quote $quote): View
-	{
-		return view('posts.edit-quotes', [
-			'quote'  => $quote,
-		]);
-	}
+    public function list(): View
+    {
+        return view('components.quote-list', [
+            'movies' => Movie::all(),
+            'quotes' => Quote::latest()->paginate(5)
+        ]);
+    }
 
-	public function update(ChangeQuoteRequest $request, Quote $quote): RedirectResponse
-	{
-		if (isset($attributes['thumbnail']))
-		{
-			File::delete('storage/' . $quote->thumbnail);
-			$attributes['thumbnail'] = request()->file('thumbnail')->store('images');
-			$quote->thumbnail = request()->file('thumbnail')->store('images');
-		}
+    public function store(StoreQuoteRequest $request)
+    {
+        request()->file('thumbnail')->store('images');
+        $quote = new Quote();
+        $translations = ['en' => $request->title_en, 'ka' => $request->title_ka];
+        $quote->setTranslations('quote', $translations);
+        $quote->thumbnail = request()->file('thumbnail')->store('images');
+        $quote->movie_id = $request['movie_id'];
+        $quote->save();
+        return redirect()->route('quote.list');
+    }
 
-		$translations = ['en' => $request->title_en, 'ka' => $request->title_ka];
-		$quote->setTranslations('quote', $translations);
-		$quote->movie_id = $request['movie_id'];
+    public function edit(Quote $quote): View
+    {
+        return view('posts.edit-quotes', [
+            'quote'  => $quote,
+        ]);
+    }
 
-		$quote->save();
-		return redirect()->route('quote.list');
-	}
+    public function update(ChangeQuoteRequest $request, Quote $quote): RedirectResponse
+    {
+        if (isset($attributes['thumbnail'])) {
+            File::delete('storage/' . $quote->thumbnail);
+            $attributes['thumbnail'] = request()->file('thumbnail')->store('images');
+            $quote->thumbnail = request()->file('thumbnail')->store('images');
+        }
 
-	public function destroy(Quote $quote): RedirectResponse
-	{
-		File::delete('storage/' . $quote->thumbnail);
-		$quote->delete();
-		return redirect()->route('quote.list');
-	}
+        $translations = ['en' => $request->title_en, 'ka' => $request->title_ka];
+        $quote->setTranslations('quote', $translations);
+        $quote->movie_id = $request['movie_id'];
+
+        $quote->save();
+        return redirect()->route('quote.list');
+    }
+
+    public function destroy(Quote $quote): RedirectResponse
+    {
+        File::delete('storage/' . $quote->thumbnail);
+        $quote->delete();
+        return redirect()->route('quote.list');
+    }
 }
